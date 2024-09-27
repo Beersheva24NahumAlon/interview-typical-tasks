@@ -1,22 +1,22 @@
 package telran.interview;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class InterviewTasks {
     static public boolean hasSumTwo(int[] array, int sum) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        Arrays.stream(array).forEach(i -> map.put(i, sum - i));
-        Integer[] keys = map.keySet().toArray(Integer[]::new);
-        int i = 0;
-        while (i < keys.length && !isSum(keys[i], map)) {
-            i++;
+        HashSet<Integer> set = new HashSet<>();
+        Arrays.stream(array).forEach(i -> set.add(i));
+        Iterator<Integer> it = set.iterator();
+        Integer cur = it.next();
+        while (it.hasNext() && !isSum(set, cur, sum)) {
+            cur = it.next();
         }
-        return i != keys.length;
+        return it.hasNext();
     }
 
-    private static boolean isSum(Integer key, HashMap<Integer, Integer> map) {
-        Integer value = map.get(key);
-        return key == map.get(value) && value != key;
-    }
+    private static boolean isSum(HashSet<Integer> set, Integer cur, Integer sum) {
+        return set.contains(sum - cur) && cur != sum - cur;
+    }   
 }
