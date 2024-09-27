@@ -31,8 +31,7 @@ public class ConnectionPool {
             throw new IllegalStateException();
         }
         String connectionId = connection.connectionId();
-        map.putIfAbsent(connectionId, connection);
-        
+        map.putIfAbsent(connectionId, connection);   
     }
 
     public Connection getConnection(String connectionId) {

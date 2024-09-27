@@ -33,7 +33,6 @@ public class ConnectionPoolTest {
         assertThrowsExactly(IllegalStateException.class,
         () -> connectionPool.addConnection(new Connection("435")));
         runAssertion(expected, connectionPool);
-
     }
 
     @Test
