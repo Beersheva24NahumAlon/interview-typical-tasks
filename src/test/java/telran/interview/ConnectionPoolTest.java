@@ -30,9 +30,10 @@ public class ConnectionPoolTest {
     void addConnectionTest() {
         String[] expected = { "sdv", "435", "hgf" };
         connectionPool.addConnection(new Connection("hgf"));
-        runAssertion(expected, connectionPool);
         assertThrowsExactly(IllegalStateException.class,
-                () -> connectionPool.addConnection(new Connection("hgf")));
+        () -> connectionPool.addConnection(new Connection("435")));
+        runAssertion(expected, connectionPool);
+
     }
 
     @Test

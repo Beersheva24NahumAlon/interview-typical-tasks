@@ -27,19 +27,18 @@ public class ConnectionPool {
     }
 
     public void addConnection(Connection connection) {
-        String connectionId = connection.connectionId();
-        Connection conn = map.get(connectionId);
-        if (conn != null) {
+        if (map.containsValue(connection)) {
             throw new IllegalStateException();
         }
-        map.put(connectionId, connection);
+        String connectionId = connection.connectionId();
+        map.putIfAbsent(connectionId, connection);
+        
     }
 
     public Connection getConnection(String connectionId) {
-        Connection conn = map.get(connectionId);
-        if (conn == null) {
+        if (!map.containsKey(connectionId)) {
             throw new NoSuchElementException();
         }
-        return conn;
+        return map.get(connectionId);
     }
 }
