@@ -16,7 +16,6 @@ public class AutoCompletionTest {
         for (String word : words) {
             autoCompletion.addWord(word);
         }
-        String[] strings = autoCompletion.getVariants("av");
         assertArrayEquals(wordsAb, autoCompletion.getVariants("ab"));
         assertArrayEquals(wordsAv, autoCompletion.getVariants("av"));
         assertArrayEquals(wordsAa, autoCompletion.getVariants("aa"));
