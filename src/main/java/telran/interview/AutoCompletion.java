@@ -3,24 +3,20 @@ package telran.interview;
 import java.util.*;
 
 public class AutoCompletion {
-    private TreeMap<String, ArrayList<String>> map = new TreeMap<>();
+    private TreeSet<String> set = new TreeSet<>((s1, s2) -> s1.toLowerCase().compareTo(s2.toLowerCase()));
 
     public boolean addWord(String word) {
         boolean res = false;
-        String wordLowerCase = word.toLowerCase();
-        ArrayList<String> list = map.getOrDefault(wordLowerCase, new ArrayList<>());
-        if (!list.contains(word)) {
+        if (!set.contains(word)) {
             res = true;
-            list.add(word);
-            map.put(wordLowerCase, list);
+            set.add(word);
         }
         return res;
     }
 
     public String[] getVariants(String prefix) {
         String lowerCasePrexif = prefix.toLowerCase();
-        return map.subMap(lowerCasePrexif, nextPrefix(lowerCasePrexif))
-                .entrySet().stream().flatMap(e -> e.getValue().stream()).toArray(String[]::new);
+        return set.subSet(lowerCasePrexif, nextPrefix(lowerCasePrexif)).toArray(String[]::new);
     }
 
     private String nextPrefix(String prefix) {

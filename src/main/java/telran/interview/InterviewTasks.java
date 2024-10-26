@@ -46,15 +46,7 @@ public class InterviewTasks {
         boolean res = false;
         if (word.length() == anagram.length() && !word.equals(anagram)) {
             Map<Integer, Long> map = word.chars().boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-            anagram.chars().boxed().filter(map::containsKey).forEach(c -> {
-                long count = map.get(c) - 1;
-                if (count == 0) {
-                    map.remove(c);
-                } else {
-                    map.put(c, count);
-                }
-            });
-            res = map.isEmpty();
+            res = anagram.chars().allMatch(c -> map.merge(c, -1l, (o, n) -> o - 1) > -1);
         } 
         return res;
     }
