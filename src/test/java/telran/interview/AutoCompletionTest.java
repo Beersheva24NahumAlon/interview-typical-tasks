@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class AutoCompletionTest {
-    String[] words = { "ab", "ABC", "avfdr", "aV", "aVV", "aaA" };
-    String[] wordsAb = { "ab", "ABC" };
+    String[] words = { "ab", "ABC", "AB", "avfdr", "aV", "aVV", "aaA" };
+    String[] wordsAb = { "ab", "AB", "ABC" };
     String[] wordsAv = { "aV", "avfdr", "aVV", };
     String[] wordsAa = { "aaA" };
 

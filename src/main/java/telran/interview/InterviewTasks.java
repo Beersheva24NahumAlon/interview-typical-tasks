@@ -44,13 +44,18 @@ public class InterviewTasks {
 
     public static boolean isAnagram(String word, String anagram) {
         boolean res = false;
-        if (word.length() == anagram.length() && word != anagram) {
-            res = Objects.equals(getMapFromString(word), getMapFromString(anagram));
+        if (word.length() == anagram.length() && !word.equals(anagram)) {
+            Map<Integer, Long> map = word.chars().boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            anagram.chars().boxed().filter(map::containsKey).forEach(c -> {
+                long count = map.get(c) - 1;
+                if (count == 0) {
+                    map.remove(c);
+                } else {
+                    map.put(c, count);
+                }
+            });
+            res = map.isEmpty();
         } 
         return res;
-    }
-
-    private static Map<Integer, Long> getMapFromString(String word) {
-        return word.chars().boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
