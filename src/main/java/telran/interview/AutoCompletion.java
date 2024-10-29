@@ -11,6 +11,6 @@ public class AutoCompletion {
 
     public String[] getVariants(String prefix) {
         String lowerCasePrexif = prefix.toLowerCase();
-        return set.subSet(lowerCasePrexif, (lowerCasePrexif + Character.MAX_VALUE)).toArray(String[]::new);
+        return set.subSet(lowerCasePrexif, lowerCasePrexif + Character.MAX_VALUE).toArray(String[]::new);
     }
 }
